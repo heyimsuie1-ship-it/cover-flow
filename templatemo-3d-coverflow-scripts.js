@@ -739,10 +739,6 @@ https://templatemo.com/tm-595-3d-coverflow
             setTimeout(() => {
                 generateViralImage();
             }, 800);
-        });
-
-            // Initial auto-generate once page loads
-            setTimeout(generateViralImage, 800);
         }
 
         // Initialize
