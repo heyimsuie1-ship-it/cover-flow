@@ -539,7 +539,7 @@ https://templatemo.com/tm-595-3d-coverflow
         }
 
         function generateViralImage() {
-            if (!ctx || !canvas) return;
+            if (!ctx || !canvas) return Promise.resolve();
 
             const niche = nicheSelect ? nicheSelect.value : 'motivation';
             const tone = toneSelect ? toneSelect.value : 'soft';
@@ -554,133 +554,140 @@ https://templatemo.com/tm-595-3d-coverflow
             img.crossOrigin = 'anonymous';
             img.src = bgSrc + '?v=' + Date.now();
 
-            img.onload = function () {
-                const w = canvas.width;
-                const h = canvas.height;
+            return new Promise((resolve, reject) => {
+                img.onload = function () {
+                    const w = canvas.width;
+                    const h = canvas.height;
 
-                ctx.clearRect(0, 0, w, h);
+                    ctx.clearRect(0, 0, w, h);
 
-                const imgRatio = img.width / img.height;
-                const canvasRatio = w / h;
-                let drawWidth, drawHeight, dx, dy;
+                    const imgRatio = img.width / img.height;
+                    const canvasRatio = w / h;
+                    let drawWidth, drawHeight, dx, dy;
 
-                if (imgRatio > canvasRatio) {
-                    drawHeight = h;
-                    drawWidth = imgRatio * drawHeight;
-                } else {
-                    drawWidth = w;
-                    drawHeight = drawWidth / imgRatio;
-                }
-
-                dx = (w - drawWidth) / 2;
-                dy = (h - drawHeight) / 2;
-
-                ctx.drawImage(img, dx, dy, drawWidth, drawHeight);
-
-                ctx.fillStyle = style.overlayColor;
-                ctx.fillRect(0, 0, w, h);
-
-                const cardPadding = w * 0.08;
-                const cardWidth = w - cardPadding * 2;
-                const cardHeight = h * 0.5;
-                const cardX = cardPadding;
-                const cardY = h * 0.27;
-
-                const gradient = ctx.createLinearGradient(cardX, cardY, cardX + cardWidth, cardY + cardHeight);
-                gradient.addColorStop(0, style.gradientFrom);
-                gradient.addColorStop(1, style.gradientTo);
-
-                ctx.fillStyle = gradient;
-                ctx.roundRect = ctx.roundRect || function (x, y, width, height, radius) {
-                    if (width < 0) {
-                        x = x + width;
-                        width = -width;
-                    }
-                    if (height < 0) {
-                        y = y + height;
-                        height = -height;
-                    }
-                    if (typeof radius === 'undefined') {
-                        radius = 5;
-                    }
-                    if (typeof radius === 'number') {
-                        radius = { tl: radius, tr: radius, br: radius, bl: radius };
+                    if (imgRatio > canvasRatio) {
+                        drawHeight = h;
+                        drawWidth = imgRatio * drawHeight;
                     } else {
-                        const defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
-                        for (const side in defaultRadius) {
-                            radius[side] = radius[side] || defaultRadius[side];
-                        }
+                        drawWidth = w;
+                        drawHeight = drawWidth / imgRatio;
                     }
+
+                    dx = (w - drawWidth) / 2;
+                    dy = (h - drawHeight) / 2;
+
+                    ctx.drawImage(img, dx, dy, drawWidth, drawHeight);
+
+                    ctx.fillStyle = style.overlayColor;
+                    ctx.fillRect(0, 0, w, h);
+
+                    const cardPadding = w * 0.08;
+                    const cardWidth = w - cardPadding * 2;
+                    const cardHeight = h * 0.5;
+                    const cardX = cardPadding;
+                    const cardY = h * 0.27;
+
+                    const gradient = ctx.createLinearGradient(cardX, cardY, cardX + cardWidth, cardY + cardHeight);
+                    gradient.addColorStop(0, style.gradientFrom);
+                    gradient.addColorStop(1, style.gradientTo);
+
+                    ctx.fillStyle = gradient;
+                    ctx.roundRect = ctx.roundRect || function (x, y, width, height, radius) {
+                        if (width < 0) {
+                            x = x + width;
+                            width = -width;
+                        }
+                        if (height < 0) {
+                            y = y + height;
+                            height = -height;
+                        }
+                        if (typeof radius === 'undefined') {
+                            radius = 5;
+                        }
+                        if (typeof radius === 'number') {
+                            radius = { tl: radius, tr: radius, br: radius, bl: radius };
+                        } else {
+                            const defaultRadius = { tl: 0, tr: 0, br: 0, bl: 0 };
+                            for (const side in defaultRadius) {
+                                radius[side] = radius[side] || defaultRadius[side];
+                            }
+                        }
+                        ctx.beginPath();
+                        ctx.moveTo(x + radius.tl, y);
+                        ctx.lineTo(x + width - radius.tr, y);
+                        ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
+                        ctx.lineTo(x + width, y + height - radius.br);
+                        ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
+                        ctx.lineTo(x + radius.bl, y + height);
+                        ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
+                        ctx.lineTo(x, y + radius.tl);
+                        ctx.quadraticCurveTo(x, y, x + radius.tl, y);
+                        ctx.closePath();
+                    };
+
+                    ctx.roundRect(cardX, cardY, cardWidth, cardHeight, 40);
+                    ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                    ctx.shadowBlur = 40;
+                    ctx.shadowOffsetY = 18;
+                    ctx.fill();
+                    ctx.shadowColor = 'transparent';
+
+                    const tagHeight = 40;
+                    const tagWidth = 140;
+                    const tagX = cardX + 24;
+                    const tagY = cardY + 24;
+                    ctx.fillStyle = style.accentColor;
+                    ctx.globalAlpha = 0.85;
                     ctx.beginPath();
-                    ctx.moveTo(x + radius.tl, y);
-                    ctx.lineTo(x + width - radius.tr, y);
-                    ctx.quadraticCurveTo(x + width, y, x + width, y + radius.tr);
-                    ctx.lineTo(x + width, y + height - radius.br);
-                    ctx.quadraticCurveTo(x + width, y + height, x + width - radius.br, y + height);
-                    ctx.lineTo(x + radius.bl, y + height);
-                    ctx.quadraticCurveTo(x, y + height, x, y + height - radius.bl);
-                    ctx.lineTo(x, y + radius.tl);
-                    ctx.quadraticCurveTo(x, y, x + radius.tl, y);
-                    ctx.closePath();
+                    ctx.roundRect(tagX, tagY, tagWidth, tagHeight, 20);
+                    ctx.fill();
+                    ctx.globalAlpha = 1;
+                    ctx.font = '500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText('#' + niche.toUpperCase(), tagX + 18, tagY + tagHeight / 2);
+
+                    ctx.font = '700 46px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.fillStyle = style.textColor;
+                    ctx.textAlign = 'left';
+                    ctx.textBaseline = 'top';
+
+                    const textAreaX = cardX + 40;
+                    const textAreaY = cardY + 90;
+                    const textAreaWidth = cardWidth - 80;
+                    const lineHeight = 52;
+
+                    wrapText(ctx, baseText, textAreaX, textAreaY, textAreaWidth, lineHeight);
+
+                    ctx.font = '500 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.75)';
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'bottom';
+
+                    const brandText = (brandNameInput && brandNameInput.value.trim())
+                        ? brandNameInput.value.trim()
+                        : 'facebook.com/yourpage';
+
+                    ctx.fillText(brandText, cardX + cardWidth - 32, cardY + cardHeight - 24);
+
+                    if (downloadBtn) {
+                        downloadBtn.disabled = false;
+                    }
+
+                    resolve();
                 };
 
-                ctx.roundRect(cardX, cardY, cardWidth, cardHeight, 40);
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
-                ctx.shadowBlur = 40;
-                ctx.shadowOffsetY = 18;
-                ctx.fill();
-                ctx.shadowColor = 'transparent';
-
-                const tagHeight = 40;
-                const tagWidth = 140;
-                const tagX = cardX + 24;
-                const tagY = cardY + 24;
-                ctx.fillStyle = style.accentColor;
-                ctx.globalAlpha = 0.85;
-                ctx.beginPath();
-                ctx.roundRect(tagX, tagY, tagWidth, tagHeight, 20);
-                ctx.fill();
-                ctx.globalAlpha = 1;
-                ctx.font = '500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-                ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)';
-                ctx.textBaseline = 'middle';
-                ctx.fillText('#' + niche.toUpperCase(), tagX + 18, tagY + tagHeight / 2);
-
-                ctx.font = '700 46px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-                ctx.fillStyle = style.textColor;
-                ctx.textAlign = 'left';
-                ctx.textBaseline = 'top';
-
-                const textAreaX = cardX + 40;
-                const textAreaY = cardY + 90;
-                const textAreaWidth = cardWidth - 80;
-                const lineHeight = 52;
-
-                wrapText(ctx, baseText, textAreaX, textAreaY, textAreaWidth, lineHeight);
-
-                ctx.font = '500 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-                ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.75)';
-                ctx.textAlign = 'right';
-                ctx.textBaseline = 'bottom';
-
-                const brandText = (brandNameInput && brandNameInput.value.trim())
-                    ? brandNameInput.value.trim()
-                    : 'facebook.com/yourpage';
-
-                ctx.fillText(brandText, cardX + cardWidth - 32, cardY + cardHeight - 24);
-
-                if (downloadBtn) {
-                    downloadBtn.disabled = false;
-                }
-            };
-
-            img.onerror = function () {
-                console.error('Failed to load image for generator:', bgSrc);
-            };
+                img.onerror = function () {
+                    console.error('Failed to load image for generator:', bgSrc);
+                    reject(new Error('Failed to load generator background'));
+                };
+            });
         }
 
         if (generateBtn && downloadBtn && ctx && canvas) {
-            generateBtn.addEventListener('click', generateViralImage);
+            generateBtn.addEventListener('click', () => {
+                generateViralImage();
+            });
 
             downloadBtn.addEventListener('click', function () {
                 const link = document.createElement('a');
@@ -689,6 +696,50 @@ https://templatemo.com/tm-595-3d-coverflow
                 link.href = canvas.toDataURL('image/png');
                 link.click();
             });
+
+            // Batch generate button (without changing HTML)
+            const buttonsContainer = document.querySelector('.generator-buttons');
+            if (buttonsContainer) {
+                const batchBtn = document.createElement('button');
+                batchBtn.type = 'button';
+                batchBtn.id = 'batchBtn';
+                batchBtn.className = 'generator-btn secondary';
+                batchBtn.textContent = 'Batch Generate & Download';
+
+                batchBtn.addEventListener('click', async () => {
+                    const input = prompt('Kitni images generate & download karni hain? (1-20)', '5');
+                    const parsed = parseInt(input || '0', 10);
+                    if (!parsed || parsed <= 0) {
+                        return;
+                    }
+                    const count = Math.min(Math.max(parsed, 1), 20);
+
+                    if (downloadBtn) {
+                        downloadBtn.disabled = true;
+                    }
+
+                    for (let i = 0; i < count; i++) {
+                        await generateViralImage();
+                        const link = document.createElement('a');
+                        const niche = nicheSelect ? nicheSelect.value : 'post';
+                        link.download = `facebook-${niche}-post-${Date.now()}-${i + 1}.png`;
+                        link.href = canvas.toDataURL('image/png');
+                        link.click();
+                    }
+
+                    if (downloadBtn) {
+                        downloadBtn.disabled = false;
+                    }
+                });
+
+                buttonsContainer.appendChild(batchBtn);
+            }
+
+            // Initial auto-generate once page loads
+            setTimeout(() => {
+                generateViralImage();
+            }, 800);
+        });
 
             // Initial auto-generate once page loads
             setTimeout(generateViralImage, 800);
