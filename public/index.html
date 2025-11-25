@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Local Viral Image Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Local Viral Image Generator</h1>
+        <p class="tagline">All processing happens on your machine. No external APIs required.</p>
+    </header>
+
+    <main class="main">
+        <section class="controls">
+            <div class="control-group">
+                <h2>1. Background</h2>
+                <button id="generateBackgroundBtn" class="btn primary">Generate Background</button>
+                <p class="hint">This calls GET /generate and randomly picks a local image.</p>
+            </div>
+
+            <div class="control-group">
+                <h2>2. Text Overlay</h2>
+                <label for="overlayText">Text</label>
+                <textarea id="overlayText" rows="3" placeholder="Write your overlay text here"></textarea>
+
+                <label for="fontSize">Font size: <span id="fontSizeValue">64</span> px</label>
+                <input id="fontSize" type="range" min="24" max="96" value="64">
+
+                <label for="color">Text color</label>
+                <input id="color" type="color" value="#ffffff">
+            </div>
+
+            <div class="control-group">
+                <h2>3. Apply &amp; Download</h2>
+                <button id="applyOverlayBtn" class="btn secondary">Apply Text Overlay</button>
+                <button id="downloadBtn" class="btn" disabled>Download Image</button>
+            </div>
+        </section>
+
+        <section class="preview">
+            <h2>Preview</h2>
+            <div class="preview-wrapper">
+                <img id="previewImage" src="/fallback.png" alt="Preview image">
+            </div>
+            <p class="hint">
+                On load we use <code>/fallback.png</code>. When you click "Generate Background"
+                we call <code>/generate</code>. "Apply Text Overlay" posts to <code>/overlay</code>.
+            </p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span>Local-only demo • Express + Sharp • No external network calls</span>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
