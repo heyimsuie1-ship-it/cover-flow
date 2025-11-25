@@ -114,6 +114,65 @@ https://templatemo.com/tm-595-3d-coverflow
                 </button>
             </div>
         </div>
+
+        <!-- Viral Image Generator Panel -->
+        <div class="generator-panel">
+            <div class="generator-controls">
+                <h2 class="generator-title">Facebook Viral Image Generator</h2>
+                <p class="generator-subtitle">Har click par naya, unique aur viral-style post ready.</p>
+
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="nicheSelect">Niche / Category</label>
+                        <select id="nicheSelect">
+                            <option value="love">Love &amp; Relationships</option>
+                            <option value="family">Family &amp; Parenting</option>
+                            <option value="selfcare">Self-care &amp; Mental Health</option>
+                            <option value="motivation">Motivation &amp; Life Lessons</option>
+                            <option value="girlpower">Girl Power &amp; Aesthetic</option>
+                            <option value="funny">Funny &amp; Relatable</option>
+                            <option value="pets">Pets &amp; Animal Lovers</option>
+                            <option value="travel">Travel &amp; Lifestyle</option>
+                            <option value="fitness">Fitness &amp; Wellness</option>
+                            <option value="spiritual">Spiritual &amp; Positive Vibes</option>
+                            <option value="business">Business &amp; Side Hustle</option>
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <label for="toneSelect">Tone / Style</label>
+                        <select id="toneSelect">
+                            <option value="soft">Soft &amp; Aesthetic</option>
+                            <option value="bold">Bold &amp; High Contrast</option>
+                            <option value="minimal">Minimal Clean</option>
+                            <option value="dark">Dark Theme</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-col full-width">
+                        <label for="customText">Custom Text (optional)</label>
+                        <textarea id="customText" rows="2" placeholder="Khali chor do to main viral-style line khud likh dunga."></textarea>
+                    </div>
+                </div>
+
+                <div class="generator-buttons">
+                    <button type="button" id="generateBtn" class="generator-btn primary">
+                        Generate New Image
+                    </button>
+                    <button type="button" id="downloadBtn" class="generator-btn secondary" disabled>
+                        Download PNG
+                    </button>
+                </div>
+            </div>
+
+            <div class="generator-preview">
+                <div class="preview-inner">
+                    <canvas id="previewCanvas" width="1080" height="1080"></canvas>
+                </div>
+                <p class="preview-hint">Tip: Har baar “Generate New Image” dabane se naya background + naya text combination milega.</p>
+            </div>
+        </div>
     </section>
 
     <!-- About Section -->
