@@ -406,6 +406,56 @@ https://templatemo.com/tm-595-3d-coverflow
             'images/cascading-waterfall.jpg'
         ];
 
+        // Niche based background mapping for better storytelling
+        const backgroundByNiche = {
+            love: [
+                'images/ocean-sunset-golden-hour.jpg',
+                'images/starry-night.jpg',
+                'images/serene-water-mirroring.jpg'
+            ],
+            family: [
+                'images/forest-path.jpg',
+                'images/mountain-landscape.jpg'
+            ],
+            selfcare: [
+                'images/serene-water-mirroring.jpg',
+                'images/forest-path.jpg'
+            ],
+            motivation: [
+                'images/rolling-sand-dunes.jpg',
+                'images/mountain-landscape.jpg',
+                'images/starry-night.jpg'
+            ],
+            girlpower: [
+                'images/starry-night.jpg',
+                'images/rolling-sand-dunes.jpg'
+            ],
+            funny: [
+                'images/forest-path.jpg',
+                'images/mountain-landscape.jpg'
+            ],
+            pets: [
+                'images/forest-path.jpg'
+            ],
+            travel: [
+                'images/serene-water-mirroring.jpg',
+                'images/ocean-sunset-golden-hour.jpg',
+                'images/mountain-landscape.jpg'
+            ],
+            fitness: [
+                'images/rolling-sand-dunes.jpg',
+                'images/mountain-landscape.jpg'
+            ],
+            spiritual: [
+                'images/starry-night.jpg',
+                'images/serene-water-mirroring.jpg'
+            ],
+            business: [
+                'images/mountain-landscape.jpg',
+                'images/rolling-sand-dunes.jpg'
+            ]
+        };
+
         const nicheTexts = {
             english: {
                 love: [
@@ -567,28 +617,28 @@ https://templatemo.com/tm-595-3d-coverflow
 
         const toneStyles = {
             soft: {
-                overlayColor: 'rgba(255, 255, 255, 0.22)',
-                gradientFrom: 'rgba(146, 151, 213, 0.75)',
-                gradientTo: 'rgba(251, 194, 235, 0.85)',
-                textColor: '#111111',
-                accentColor: 'rgba(0,0,0,0.85)'
-            },
-            bold: {
-                overlayColor: 'rgba(0, 0, 0, 0.55)',
-                gradientFrom: 'rgba(255, 75, 90, 0.95)',
-                gradientTo: 'rgba(255, 196, 0, 0.95)',
+                overlayColor: 'rgba(0, 0, 0, 0.4)',
+                gradientFrom: 'rgba(146, 151, 213, 0.7)',
+                gradientTo: 'rgba(251, 194, 235, 0.8)',
                 textColor: '#ffffff',
                 accentColor: 'rgba(0,0,0,0.9)'
             },
+            bold: {
+                overlayColor: 'rgba(0, 0, 0, 0.45)',
+                gradientFrom: 'rgba(255, 75, 90, 0.9)',
+                gradientTo: 'rgba(255, 196, 0, 0.9)',
+                textColor: '#ffffff',
+                accentColor: 'rgba(0,0,0,0.95)'
+            },
             minimal: {
-                overlayColor: 'rgba(0, 0, 0, 0.35)',
+                overlayColor: 'rgba(0, 0, 0, 0.4)',
                 gradientFrom: 'rgba(15, 15, 15, 0.95)',
                 gradientTo: 'rgba(15, 15, 15, 0.95)',
                 textColor: '#ffffff',
                 accentColor: 'rgba(255,255,255,0.9)'
             },
             dark: {
-                overlayColor: 'rgba(0, 0, 0, 0.6)',
+                overlayColor: 'rgba(0, 0, 0, 0.45)',
                 gradientFrom: 'rgba(36, 0, 70, 0.95)',
                 gradientTo: 'rgba(0, 0, 0, 0.95)',
                 textColor: '#ffffff',
@@ -656,7 +706,10 @@ https://templatemo.com/tm-595-3d-coverflow
                 ? seriesNumberInput.value.trim()
                 : '';
 
-            const bgSrc = pickRandom(generatorBackgrounds);
+            const bgPool = (backgroundByNiche[niche] && backgroundByNiche[niche].length)
+                ? backgroundByNiche[niche]
+                : generatorBackgrounds;
+            const bgSrc = pickRandom(bgPool);
             const img = new Image();
             img.crossOrigin = 'anonymous';
             img.src = bgSrc + '?v=' + Date.now();
@@ -697,9 +750,10 @@ https://templatemo.com/tm-595-3d-coverflow
 
                     const cardPadding = w * 0.08;
                     const cardWidth = w - cardPadding * 2;
-                    const cardHeight = templateStyle === 'minimal' ? h * 0.45 : h * 0.5;
+                    // Slightly shorter card for less empty space
+                    const cardHeight = templateStyle === 'minimal' ? h * 0.32 : h * 0.35;
                     const cardX = cardPadding;
-                    const cardY = templateStyle === 'minimal' ? h * 0.3 : h * 0.27;
+                    const cardY = templateStyle === 'minimal' ? h * 0.3 : h * 0.32;
 
                     const gradient = ctx.createLinearGradient(cardX, cardY, cardX + cardWidth, cardY + cardHeight);
                     gradient.addColorStop(0, style.gradientFrom);
@@ -757,7 +811,7 @@ https://templatemo.com/tm-595-3d-coverflow
                     ctx.roundRect(tagX, tagY, tagWidth, tagHeight, 20);
                     ctx.fill();
                     ctx.globalAlpha = 1;
-                    ctx.font = '500 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.font = '600 15px "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
                     ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)';
                     ctx.textBaseline = 'middle';
                     ctx.textAlign = 'left';
@@ -796,11 +850,20 @@ https://templatemo.com/tm-595-3d-coverflow
 
                     // Main quote
                     ctx.font = templateStyle === 'minimal'
-                        ? '700 42px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                        : '700 46px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                        ? '800 40px "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+                        : '800 44px "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
                     ctx.fillStyle = style.textColor;
-                    const mainLineHeight = templateStyle === 'minimal' ? 48 : 52;
+                    // Subtle glow for quote text
+                    ctx.shadowColor = 'rgba(0,0,0,0.6)';
+                    ctx.shadowBlur = 6;
+                    ctx.shadowOffsetY = 2;
+                    const mainLineHeight = templateStyle === 'minimal' ? 46 : 50;
                     wrapText(ctx, mainQuote, textAreaX, currentY, textAreaWidth, mainLineHeight);
+
+                    // Reset shadow for rest of elements
+                    ctx.shadowColor = 'transparent';
+                    ctx.shadowBlur = 0;
+                    ctx.shadowOffsetY = 0;
 
                     currentY += mainLineHeight * 3;
 
@@ -815,11 +878,14 @@ https://templatemo.com/tm-595-3d-coverflow
                         ctx.fillText(ctaLine, cardX + 32, cardY + cardHeight - 24);
                     }
 
-                    // Brand / page name bottom-right
-                    ctx.font = '500 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-                    ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)';
-                    ctx.textAlign = 'right';
+                    // Brand / page name bottom-left with subtle glow
+                    ctx.font = '600 19px "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.95)' : 'rgba(0,0,0,0.9)';
+                    ctx.textAlign = 'left';
                     ctx.textBaseline = 'bottom';
+                    ctx.shadowColor = 'rgba(0,0,0,0.7)';
+                    ctx.shadowBlur = 4;
+                    ctx.shadowOffsetY = 2;
 
                     const rawBrand = (brandNameInput && brandNameInput.value.trim())
                         ? brandNameInput.value.trim()
@@ -827,7 +893,12 @@ https://templatemo.com/tm-595-3d-coverflow
                     const brandText = language === 'english'
                         ? 'Follow ' + rawBrand + ' for more'
                         : 'Follow ' + rawBrand + ' for more';
-                    ctx.fillText(brandText, cardX + cardWidth - 32, cardY + cardHeight - 24);
+                    ctx.fillText(brandText, cardX + 32, cardY + cardHeight - 24);
+
+                    // Reset shadow
+                    ctx.shadowColor = 'transparent';
+                    ctx.shadowBlur = 0;
+                    ctx.shadowOffsetY = 0;
 
                     if (downloadBtn) {
                         downloadBtn.disabled = false;
