@@ -384,6 +384,7 @@ https://templatemo.com/tm-595-3d-coverflow
         const nicheSelect = document.getElementById('nicheSelect');
         const toneSelect = document.getElementById('toneSelect');
         const customText = document.getElementById('customText');
+        const brandNameInput = document.getElementById('brandName');
         const generateBtn = document.getElementById('generateBtn');
         const downloadBtn = document.getElementById('downloadBtn');
         const canvas = document.getElementById('previewCanvas');
@@ -661,7 +662,12 @@ https://templatemo.com/tm-595-3d-coverflow
                 ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.75)';
                 ctx.textAlign = 'right';
                 ctx.textBaseline = 'bottom';
-                ctx.fillText('facebook.com/yourpage', cardX + cardWidth - 32, cardY + cardHeight - 24);
+
+                const brandText = (brandNameInput && brandNameInput.value.trim())
+                    ? brandNameInput.value.trim()
+                    : 'facebook.com/yourpage';
+
+                ctx.fillText(brandText, cardX + cardWidth - 32, cardY + cardHeight - 24);
 
                 if (downloadBtn) {
                     downloadBtn.disabled = false;
