@@ -383,8 +383,14 @@ https://templatemo.com/tm-595-3d-coverflow
 
         const nicheSelect = document.getElementById('nicheSelect');
         const toneSelect = document.getElementById('toneSelect');
+        const languageSelect = document.getElementById('languageSelect');
+        const templateSelect = document.getElementById('templateSelect');
         const customText = document.getElementById('customText');
         const brandNameInput = document.getElementById('brandName');
+        const seriesNameInput = document.getElementById('seriesName');
+        const seriesNumberInput = document.getElementById('seriesNumber');
+        const hookToggle = document.getElementById('hookToggle');
+        const ctaToggle = document.getElementById('ctaToggle');
         const generateBtn = document.getElementById('generateBtn');
         const downloadBtn = document.getElementById('downloadBtn');
         const canvas = document.getElementById('previewCanvas');
@@ -401,82 +407,161 @@ https://templatemo.com/tm-595-3d-coverflow
         ];
 
         const nicheTexts = {
-            love: [
-                "In a world full of trends, I just want something that feels like home.",
-                "If they make your soul feel seen, protect that connection.",
-                "Love is not found, it’s built little by little every single day.",
-                "The right person will choose you in every universe.",
-                "Soft hearts deserve the safest kind of love."
+            english: {
+                love: [
+                    "In a world full of trends, I just want something that feels like home.",
+                    "If they make your soul feel seen, protect that connection.",
+                    "Love is not found, it’s built little by little every single day.",
+                    "The right person will choose you in every universe.",
+                    "Soft hearts deserve the safest kind of love."
+                ],
+                family: [
+                    "Family is not about perfection, it’s about showing up.",
+                    "The older I get, the more I realize that family time is everything.",
+                    "Some of the loudest laughs live inside the quietest homes.",
+                    "Home is not a place, it’s the people who wait for you.",
+                    "One day you’ll realize the little family moments were the big moments."
+                ],
+                selfcare: [
+                    "You are not behind. You are on your own timeline.",
+                    "Healing is not about becoming someone new, it’s about coming home to yourself.",
+                    "Read this again: Rest is not a reward, it’s a right.",
+                    "You are allowed to be both a masterpiece and a work in progress.",
+                    "Protect your peace like it’s your most expensive luxury."
+                ],
+                motivation: [
+                    "Five years from now, you’ll be glad you started today.",
+                    "Move in silence, let your work be the noise.",
+                    "Your future self is begging you not to give up right now.",
+                    "Discipline will take you places motivation never could.",
+                    "You don’t need more time. You need more focus."
+                ],
+                girlpower: [
+                    "Soft but not weak. Kind but not blind. A woman who knows her worth.",
+                    "She’s not asking for a seat at the table. She’s building her own.",
+                    "Be the kind of woman your younger self needed.",
+                    "Pretty is not the point. Power is.",
+                    "Her vibe is: I know who I am, and that’s my superpower."
+                ],
+                funny: [
+                    "My daily cardio? Running late to everything.",
+                    "Adulthood is basically emailing ‘sorry for the late reply’ until you die.",
+                    "Mentally I’m here, physically I need a nap.",
+                    "If we’re not laughing, we’re not doing life right.",
+                    "I don’t rise and shine, I caffeinate and hope for the best."
+                ],
+                pets: [
+                    "My dog doesn’t know they’re my emotional support system.",
+                    "Some angels have wings, mine has four paws.",
+                    "I work hard so my pet can have a better life.",
+                    "Who rescued who? Exactly.",
+                    "The best therapist has fur and can’t speak human."
+                ],
+                travel: [
+                    "Collect moments, not stuff.",
+                    "Some places feel like they were waiting just for you.",
+                    "You were not born to live in one tiny corner of the world.",
+                    "Turn your ‘one day’ into ‘today I booked it.’",
+                    "A new place can unlock a new version of you."
+                ],
+                fitness: [
+                    "You’ll never regret a workout, only the ones you skipped.",
+                    "Discipline is doing it even when the mood is gone.",
+                    "Strong looks different on everyone. Just start.",
+                    "One workout at a time. One day at a time.",
+                    "You are not chasing a look, you’re chasing a stronger life."
+                ],
+                spiritual: [
+                    "What’s meant for you will never feel forced.",
+                    "Sometimes rejection is just redirection in disguise.",
+                    "You’re not lost, you’re being realigned.",
+                    "The energy you give is the energy you live in.",
+                    "Talk to the universe like it’s already done."
+                ],
+                business: [
+                    "Build something that pays you while you sleep.",
+                    "Your 9–5 pays the bills. Your 7–11 builds the life.",
+                    "Read this again: You are allowed to be the first millionaire in your family.",
+                    "Don’t wait for the right time, make the time right now.",
+                    "Turn your skills into invoices, not just compliments."
+                ]
+            },
+            hinglish: {
+                love: [
+                    "Jo tumhari soul ko samajh le, uss connection ko kabhi loose mat karna.",
+                    "Sahi insan woh hai jo tumhe kabhi explain karne ki zaroorat na padne de.",
+                    "Jis rishtay mein sukoon ho, usse kabhi chhodna mat.",
+                    "Wahi sahi hai jo crowd mein bhi sirf tumhe dekh raha ho.",
+                    "Dil ke saath khelne wale bahut milenge, dil samajhne wala rare hota hai."
+                ],
+                motivation: [
+                    "Aaj thoda extra mehnat, kal thoda extra life.",
+                    "Jo tumhara hai, woh tumse koi nahi cheen sakta – bas give up mat karo.",
+                    "Kaam chupchaap karo, result khud noise banega.",
+                    "Focus itna strong rakho ke excuses awaaz hi na karein.",
+                    "Abhi nahi toh kabhi nahi – bas start kar do."
+                ]
+            },
+            hindi: {
+                love: [
+                    "Jo इंसान आपकी रूह को समझ ले, उस रिश्ते को संभाल कर रखना.",
+                    "सही रिश्ता वही है जहाँ दिल को घर जैसा सुकून मिले.",
+                    "अगर कोई आपको सच में देखता है, तो उसे कभी हल्के में मत लेना.",
+                    "हर किसी को आपका समय नहीं चाहिए, किसी को बस आपका साथ चाहिए.",
+                    "ज़िंदगी में असली लक वह रिश्ता है जो दिल को शांत कर दे."
+                ],
+                motivation: [
+                    "जो आज मेहनत से भागता है, कल पछतावे से नहीं बचेगा.",
+                    "समय सबके पास होता है, फर्क बस प्रायोरिटी का होता है.",
+                    "हारने से ज़्यादा खतरनाक है कोशिश ही न करना.",
+                    "धीरे चलो लेकिन रुकना मत.",
+                    "सपने वही सच होते हैं जिनके लिए नींद तक कुर्बान कर दी जाए."
+                ]
+            }
+        };
+
+        const hookTexts = {
+            english: [
+                "Read this if you overthink relationships:",
+                "Reminder:",
+                "POV:",
+                "Not everyone will get this, but the right ones will:",
+                "If you needed a sign, this is it:"
             ],
-            family: [
-                "Family is not about perfection, it’s about showing up.",
-                "The older I get, the more I realize that family time is everything.",
-                "Some of the loudest laughs live inside the quietest homes.",
-                "Home is not a place, it’s the people who wait for you.",
-                "One day you’ll realize the little family moments were the big moments."
+            hinglish: [
+                "Ye un logon ke liye hai jo overthink karte hain:",
+                "Ek chhota sa reminder:",
+                "Kabhi socha hai?",
+                "Agar tumhe ek sign chahiye tha, toh ye wahi hai:",
+                "Dil se padhna:"
             ],
-            selfcare: [
-                "You are not behind. You are on your own timeline.",
-                "Healing is not about becoming someone new, it’s about coming home to yourself.",
-                "Read this again: Rest is not a reward, it’s a right.",
-                "You are allowed to be both a masterpiece and a work in progress.",
-                "Protect your peace like it’s your most expensive luxury."
+            hindi: [
+                "अगर आप भी ऐसा महसूस करते हैं तो ये आपके लिए है:",
+                "बस एक छोटा सा याद दिलाना:",
+                "कभी सोचा है?",
+                "अगर आपको किसी संकेत का इंतज़ार था, तो वही है:",
+                "दिल से पढ़िए:"
+            ]
+        };
+
+        const ctaTexts = {
+            english: [
+                "Save & share if this hits.",
+                "Tag someone who needs this today.",
+                "Share this if you felt this.",
+                "Keep this for the days you forget your worth."
             ],
-            motivation: [
-                "Five years from now, you’ll be glad you started today.",
-                "Move in silence, let your work be the noise.",
-                "Your future self is begging you not to give up right now.",
-                "Discipline will take you places motivation never could.",
-                "You don’t need more time. You need more focus."
+            hinglish: [
+                "Agar relate kiya ho toh save karke rakh lo.",
+                "Usse tag karo jo ye sunna deserve karta hai.",
+                "Share karo agar ye line dil ko lagi ho.",
+                "Isko save karo un dinon ke liye jab tum khud ko bhool jao."
             ],
-            girlpower: [
-                "Soft but not weak. Kind but not blind. A woman who knows her worth.",
-                "She’s not asking for a seat at the table. She’s building her own.",
-                "Be the kind of woman your younger self needed.",
-                "Pretty is not the point. Power is.",
-                "Her vibe is: I know who I am, and that’s my superpower."
-            ],
-            funny: [
-                "My daily cardio? Running late to everything.",
-                "Adulthood is basically emailing ‘sorry for the late reply’ until you die.",
-                "Mentally I’m here, physically I need a nap.",
-                "If we’re not laughing, we’re not doing life right.",
-                "I don’t rise and shine, I caffeinate and hope for the best."
-            ],
-            pets: [
-                "My dog doesn’t know they’re my emotional support system.",
-                "Some angels have wings, mine has four paws.",
-                "I work hard so my pet can have a better life.",
-                "Who rescued who? Exactly.",
-                "The best therapist has fur and can’t speak human."
-            ],
-            travel: [
-                "Collect moments, not stuff.",
-                "Some places feel like they were waiting just for you.",
-                "You were not born to live in one tiny corner of the world.",
-                "Turn your ‘one day’ into ‘today I booked it.’",
-                "A new place can unlock a new version of you."
-            ],
-            fitness: [
-                "You’ll never regret a workout, only the ones you skipped.",
-                "Discipline is doing it even when the mood is gone.",
-                "Strong looks different on everyone. Just start.",
-                "One workout at a time. One day at a time.",
-                "You are not chasing a look, you’re chasing a stronger life."
-            ],
-            spiritual: [
-                "What’s meant for you will never feel forced.",
-                "Sometimes rejection is just redirection in disguise.",
-                "You’re not lost, you’re being realigned.",
-                "The energy you give is the energy you live in.",
-                "Talk to the universe like it’s already done."
-            ],
-            business: [
-                "Build something that pays you while you sleep.",
-                "Your 9–5 pays the bills. Your 7–11 builds the life.",
-                "Read this again: You are allowed to be the first millionaire in your family.",
-                "Don’t wait for the right time, make the time right now.",
-                "Turn your skills into invoices, not just compliments."
+            hindi: [
+                "अगर बात दिल तक पहुँची हो तो इसे संभाल कर रखिए.",
+                "जिसे इसकी ज़रूरत है उसे टैग कीजिए.",
+                "महसूस हुआ हो तो इसे शेयर कीजिए.",
+                "खुद की कीमत भूल जाओ, तब इसे फिर से पढ़ना."
             ]
         };
 
@@ -543,11 +628,33 @@ https://templatemo.com/tm-595-3d-coverflow
 
             const niche = nicheSelect ? nicheSelect.value : 'motivation';
             const tone = toneSelect ? toneSelect.value : 'soft';
+            const language = languageSelect ? languageSelect.value : 'english';
+            const templateStyle = templateSelect ? templateSelect.value : 'classic';
             const style = toneStyles[tone] || toneStyles.soft;
 
-            const baseText = customText && customText.value.trim()
+            const languageBucket = (nicheTexts[language] && nicheTexts[language][niche])
+                ? nicheTexts[language][niche]
+                : (nicheTexts.english[niche] || nicheTexts.english.motivation);
+
+            const mainQuote = customText && customText.value.trim()
                 ? customText.value.trim()
-                : pickRandom(nicheTexts[niche] || nicheTexts.motivation);
+                : pickRandom(languageBucket);
+
+            const hookEnabled = hookToggle ? hookToggle.checked : false;
+            const ctaEnabled = ctaToggle ? ctaToggle.checked : false;
+
+            const hookBucket = hookTexts[language] || hookTexts.english;
+            const ctaBucket = ctaTexts[language] || ctaTexts.english;
+
+            const hookLine = hookEnabled ? pickRandom(hookBucket) : '';
+            const ctaLine = ctaEnabled ? pickRandom(ctaBucket) : '';
+
+            const seriesName = seriesNameInput && seriesNameInput.value.trim()
+                ? seriesNameInput.value.trim()
+                : '';
+            const seriesNumber = seriesNumberInput && seriesNumberInput.value.trim()
+                ? seriesNumberInput.value.trim()
+                : '';
 
             const bgSrc = pickRandom(generatorBackgrounds);
             const img = new Image();
@@ -556,6 +663,13 @@ https://templatemo.com/tm-595-3d-coverflow
 
             return new Promise((resolve, reject) => {
                 img.onload = function () {
+                    // Format handling
+                    const format = 'square'; // future extension if needed
+                    if (format === 'square') {
+                        canvas.width = 1080;
+                        canvas.height = 1080;
+                    }
+
                     const w = canvas.width;
                     const h = canvas.height;
 
@@ -583,9 +697,9 @@ https://templatemo.com/tm-595-3d-coverflow
 
                     const cardPadding = w * 0.08;
                     const cardWidth = w - cardPadding * 2;
-                    const cardHeight = h * 0.5;
+                    const cardHeight = templateStyle === 'minimal' ? h * 0.45 : h * 0.5;
                     const cardX = cardPadding;
-                    const cardY = h * 0.27;
+                    const cardY = templateStyle === 'minimal' ? h * 0.3 : h * 0.27;
 
                     const gradient = ctx.createLinearGradient(cardX, cardY, cardX + cardWidth, cardY + cardHeight);
                     gradient.addColorStop(0, style.gradientFrom);
@@ -632,8 +746,9 @@ https://templatemo.com/tm-595-3d-coverflow
                     ctx.fill();
                     ctx.shadowColor = 'transparent';
 
+                    // Hashtag/tag strip
                     const tagHeight = 40;
-                    const tagWidth = 140;
+                    const tagWidth = 170;
                     const tagX = cardX + 24;
                     const tagY = cardY + 24;
                     ctx.fillStyle = style.accentColor;
@@ -642,32 +757,76 @@ https://templatemo.com/tm-595-3d-coverflow
                     ctx.roundRect(tagX, tagY, tagWidth, tagHeight, 20);
                     ctx.fill();
                     ctx.globalAlpha = 1;
-                    ctx.font = '500 16px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.font = '500 15px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
                     ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.9)';
                     ctx.textBaseline = 'middle';
-                    ctx.fillText('#' + niche.toUpperCase(), tagX + 18, tagY + tagHeight / 2);
+                    ctx.textAlign = 'left';
+                    const tagText = '#'.concat(niche.toUpperCase(), ' • ').concat(language === 'english' ? 'REAL TALK' : 'REAL TALK');
+                    ctx.fillText(tagText, tagX + 18, tagY + tagHeight / 2);
 
-                    ctx.font = '700 46px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-                    ctx.fillStyle = style.textColor;
+                    // Series label (top right)
+                    if (seriesName || seriesNumber) {
+                        ctx.font = '500 14px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                        ctx.textAlign = 'right';
+                        ctx.textBaseline = 'middle';
+                        ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.85)' : 'rgba(0,0,0,0.8)';
+                        const seriesText = seriesName && seriesNumber
+                            ? seriesName + ' • ' + seriesNumber
+                            : (seriesName || seriesNumber);
+                        ctx.fillText(seriesText, cardX + cardWidth - 24, tagY + tagHeight / 2);
+                    }
+
+                    // Main text area
+                    const textAreaX = cardX + 40;
+                    const textAreaWidth = cardWidth - 80;
+                    let currentY = cardY + 80;
+
                     ctx.textAlign = 'left';
                     ctx.textBaseline = 'top';
 
-                    const textAreaX = cardX + 40;
-                    const textAreaY = cardY + 90;
-                    const textAreaWidth = cardWidth - 80;
-                    const lineHeight = 52;
+                    // Hook / intro line
+                    if (hookLine) {
+                        ctx.font = '500 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                        ctx.fillStyle = style.textColor === '#ffffff'
+                            ? 'rgba(255,255,255,0.9)'
+                            : 'rgba(0,0,0,0.85)';
+                        wrapText(ctx, hookLine, textAreaX, currentY, textAreaWidth, 26);
+                        currentY += 36 * 2;
+                    }
 
-                    wrapText(ctx, baseText, textAreaX, textAreaY, textAreaWidth, lineHeight);
+                    // Main quote
+                    ctx.font = templateStyle === 'minimal'
+                        ? '700 42px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+                        : '700 46px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                    ctx.fillStyle = style.textColor;
+                    const mainLineHeight = templateStyle === 'minimal' ? 48 : 52;
+                    wrapText(ctx, mainQuote, textAreaX, currentY, textAreaWidth, mainLineHeight);
 
+                    currentY += mainLineHeight * 3;
+
+                    // CTA line at bottom-left of card
+                    if (ctaLine) {
+                        ctx.font = '500 18px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                        ctx.fillStyle = style.textColor === '#ffffff'
+                            ? 'rgba(255,255,255,0.8)'
+                            : 'rgba(0,0,0,0.75)';
+                        ctx.textAlign = 'left';
+                        ctx.textBaseline = 'bottom';
+                        ctx.fillText(ctaLine, cardX + 32, cardY + cardHeight - 24);
+                    }
+
+                    // Brand / page name bottom-right
                     ctx.font = '500 20px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
-                    ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.75)';
+                    ctx.fillStyle = style.textColor === '#ffffff' ? 'rgba(255,255,255,0.9)' : 'rgba(0,0,0,0.85)';
                     ctx.textAlign = 'right';
                     ctx.textBaseline = 'bottom';
 
-                    const brandText = (brandNameInput && brandNameInput.value.trim())
+                    const rawBrand = (brandNameInput && brandNameInput.value.trim())
                         ? brandNameInput.value.trim()
                         : 'facebook.com/yourpage';
-
+                    const brandText = language === 'english'
+                        ? 'Follow ' + rawBrand + ' for more'
+                        : 'Follow ' + rawBrand + ' for more';
                     ctx.fillText(brandText, cardX + cardWidth - 32, cardY + cardHeight - 24);
 
                     if (downloadBtn) {
@@ -681,6 +840,8 @@ https://templatemo.com/tm-595-3d-coverflow
                     console.error('Failed to load image for generator:', bgSrc);
                     reject(new Error('Failed to load generator background'));
                 };
+            });
+        };
             });
         }
 
@@ -697,39 +858,69 @@ https://templatemo.com/tm-595-3d-coverflow
                 link.click();
             });
 
-            // Batch generate button (without changing HTML)
+            // Batch generate button (now with ZIP download and higher limit)
             const buttonsContainer = document.querySelector('.generator-buttons');
             if (buttonsContainer) {
                 const batchBtn = document.createElement('button');
                 batchBtn.type = 'button';
                 batchBtn.id = 'batchBtn';
                 batchBtn.className = 'generator-btn secondary';
-                batchBtn.textContent = 'Batch Generate & Download';
+                batchBtn.textContent = 'Batch Generate (ZIP)';
 
                 batchBtn.addEventListener('click', async () => {
-                    const input = prompt('Kitni images generate & download karni hain? (1-20)', '5');
+                    const input = prompt('Kitni images generate karni hain? (1-500)', '50');
                     const parsed = parseInt(input || '0', 10);
                     if (!parsed || parsed <= 0) {
                         return;
                     }
-                    const count = Math.min(Math.max(parsed, 1), 20);
+                    const count = Math.min(Math.max(parsed, 1), 500);
+
+                    if (!window.JSZip) {
+                        alert('ZIP generate karne ke liye JSZip load nahi hua. Thodi der baad try karein.');
+                        return;
+                    }
 
                     if (downloadBtn) {
                         downloadBtn.disabled = true;
                     }
+                    batchBtn.disabled = true;
+                    batchBtn.textContent = 'Generating...';
+
+                    const zip = new JSZip();
+                    const folder = zip.folder('images');
+                    const niche = nicheSelect ? nicheSelect.value : 'post';
 
                     for (let i = 0; i < count; i++) {
+                        // Har image ko generate karo
                         await generateViralImage();
-                        const link = document.createElement('a');
-                        const niche = nicheSelect ? nicheSelect.value : 'post';
-                        link.download = `facebook-${niche}-post-${Date.now()}-${i + 1}.png`;
-                        link.href = canvas.toDataURL('image/png');
-                        link.click();
+
+                        // Canvas ko PNG blob mein convert karo
+                        // eslint-disable-next-line no-await-in-loop
+                        const blob = await new Promise((resolve) => {
+                            canvas.toBlob((b) => resolve(b), 'image/png');
+                        });
+
+                        if (blob && folder) {
+                            const filename = `facebook-${niche}-post-${Date.now()}-${i + 1}.png`;
+                            folder.file(filename, blob);
+                        }
                     }
 
-                    if (downloadBtn) {
-                        downloadBtn.disabled = false;
-                    }
+                    // ZIP generate karo aur ek hi baar download
+                    zip.generateAsync({ type: 'blob' }).then((content) => {
+                        const link = document.createElement('a');
+                        const zipName = `facebook-${niche}-batch-${Date.now()}.zip`;
+                        link.download = zipName;
+                        link.href = URL.createObjectURL(content);
+                        link.click();
+                        setTimeout(() => URL.revokeObjectURL(link.href), 10000);
+                    }).finally(() => {
+                        if (downloadBtn) {
+                            downloadBtn.disabled = false;
+                        }
+                        batchBtn.disabled = false;
+                        batchBtn.textContent = 'Batch Generate (ZIP)';
+                    });
                 });
 
                 buttonsContainer.appendChild(batchBtn);

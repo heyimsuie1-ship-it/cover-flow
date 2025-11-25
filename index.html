@@ -12,6 +12,7 @@ TemplateMo 595 3d coverflow
 https://templatemo.com/tm-595-3d-coverflow
 
 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-ltXW3x5R6oky3dgm8hZJ5lUXZVxvTZz1Y1P5w5JPqk8gP4Symqxf3pvT1UBaVomWl3yQalhlF6p0cv4KQwAy1w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 <body>
     <!-- Header -->
@@ -150,6 +151,24 @@ https://templatemo.com/tm-595-3d-coverflow
                 </div>
 
                 <div class="form-row">
+                    <div class="form-col">
+                        <label for="languageSelect">Language</label>
+                        <select id="languageSelect">
+                            <option value="english">English</option>
+                            <option value="hinglish">Hinglish</option>
+                            <option value="hindi">Hindi</option>
+                        </select>
+                    </div>
+                    <div class="form-col">
+                        <label for="templateSelect">Template Style</label>
+                        <select id="templateSelect">
+                            <option value="classic">Classic Card</option>
+                            <option value="minimal">Minimal Center</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
                     <div class="form-col full-width">
                         <label for="customText">Custom Text (optional)</label>
                         <textarea id="customText" rows="2" placeholder="Khali chor do to main viral-style line khud likh dunga."></textarea>
@@ -163,6 +182,28 @@ https://templatemo.com/tm-595-3d-coverflow
                     </div>
                 </div>
 
+                <div class="form-row">
+                    <div class="form-col">
+                        <label for="seriesName">Series Name (optional)</label>
+                        <input type="text" id="seriesName" placeholder="jaise: Love Lessons">
+                    </div>
+                    <div class="form-col">
+                        <label for="seriesNumber">Series Number (optional)</label>
+                        <input type="text" id="seriesNumber" placeholder="jaise: 03/30">
+                    </div>
+                </div>
+
+                <div class="form-row generator-toggle-row">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="hookToggle" checked>
+                        <span>Add Hook (e.g. “Read this if…”) </span>
+                    </label>
+                    <label class="toggle-label">
+                        <input type="checkbox" id="ctaToggle" checked>
+                        <span>Add CTA line (“Save &amp; share if this hits.”)</span>
+                    </label>
+                </div>
+
                 <div class="generator-buttons">
                     <button type="button" id="generateBtn" class="generator-btn primary">
                         Generate New Image
@@ -171,7 +212,6 @@ https://templatemo.com/tm-595-3d-coverflow
                         Download PNG
                     </button>
                 </div>
-            </div>
             </div>
 
             <div class="generator-preview">
